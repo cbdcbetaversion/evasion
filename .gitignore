@@ -1,0 +1,13 @@
+node_modules/
+build/
+dist/
+coverage/
+.aistudio/
+/data/
+public/assets/aistudio/
+*.tar.gz
+*.zip
+.DS_Store
+.env*
+!.env.example
+

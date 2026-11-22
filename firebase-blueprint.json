@@ -1,0 +1,48 @@
+{
+  "entities": {
+    "GoogleAuthLink": {
+      "title": "GoogleAuthLink",
+      "description": "Private owner-only record linking a verified Firebase Google Authentication user to their EVASION account.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "description": "Firebase Auth UID of the authenticated Google user.",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "evasionUserId": {
+          "type": "string",
+          "description": "Internal EVASION USR identifier bound to this Google user.",
+          "minLength": 4,
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display alias synchronized from Google Sign-In.",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Immutable server creation timestamp."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server last login/sync timestamp."
+        }
+      },
+      "required": ["uid", "evasionUserId", "displayName", "createdAt", "updatedAt"]
+    }
+  },
+  "firestore": {
+    "/googleAuthLinks/{uid}": {
+      "schema": { "$ref": "#/entities/GoogleAuthLink" },
+      "description": "Owner-isolated Google authentication link records."
+    }
+  }
+}

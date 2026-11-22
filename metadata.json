@@ -1,0 +1,6 @@
+{
+  "name": "ÉVASION - Réseau Social & Libération Collective",
+  "description": "Application sociale anti-algorithmes toxiques. Partagez vos blocages, offrez des clés, libérez-vous de la routine numérique et relevez le défi détox collectif.",
+  "requestFramePermissions": ["camera", "microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

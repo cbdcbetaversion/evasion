@@ -1,0 +1,429 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --breakpoint-xs: 30rem;
+}
+
+@layer base {
+  html, body {
+    overflow-x: clip;
+    width: 100%;
+    min-height: 100dvh;
+    touch-action: manipulation;
+  }
+
+  #root {
+    width: 100%;
+    min-height: 100dvh;
+  }
+
+  body {
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: #090707;
+    color: #f4f1f0;
+    -webkit-tap-highlight-color: transparent;
+    padding-left: env(safe-area-inset-left, 0px);
+    padding-right: env(safe-area-inset-right, 0px);
+  }
+
+  button, a, input, textarea, select, [role="button"] {
+    touch-action: manipulation;
+  }
+
+  code, kbd, samp, pre, .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+/* Mobile Safe-Area Utilities */
+.safe-area-bottom {
+  padding-bottom: max(0.5rem, env(safe-area-inset-bottom, 0px));
+}
+
+.safe-area-top {
+  padding-top: max(0.5rem, env(safe-area-inset-top, 0px));
+}
+
+/* Signature ÉVASION Obsidian + Coral-Ember Tokens */
+.evasion-btn-primary {
+  background-image: linear-gradient(90deg, #ef4444 0%, #f4512c 52%, #f97316 100%);
+  color: #ffffff;
+  box-shadow: 0 8px 26px -4px rgba(239, 68, 68, 0.42), 0 0 18px -4px rgba(249, 115, 22, 0.28);
+  transition: transform 0.16s cubic-bezier(0.16, 1, 0.3, 1), filter 0.16s ease, box-shadow 0.16s ease;
+}
+
+.evasion-btn-primary:hover:not(:disabled) {
+  filter: brightness(1.07);
+  box-shadow: 0 10px 30px -4px rgba(249, 115, 22, 0.5), 0 0 22px -4px rgba(239, 68, 68, 0.36);
+}
+
+.evasion-btn-primary:active:not(:disabled) {
+  transform: scale(0.985);
+}
+
+.evasion-surface {
+  background-color: rgba(18, 13, 13, 0.94);
+  border-color: rgba(239, 68, 68, 0.16);
+}
+
+.evasion-input {
+  background-color: rgba(21, 16, 16, 0.96);
+  border-color: rgba(239, 68, 68, 0.24);
+  color: #ffffff;
+}
+
+.evasion-input:focus {
+  border-color: #f97316;
+  box-shadow: 0 0 0 1px rgba(249, 115, 22, 0.35);
+}
+
+/* Custom glowing effects */
+.glow-red {
+  box-shadow: 0 0 24px -3px rgba(239, 68, 68, 0.4), 0 0 14px -4px rgba(249, 115, 22, 0.24);
+}
+
+.glow-emerald {
+  box-shadow: 0 0 20px -3px rgba(16, 185, 129, 0.4);
+}
+
+.glow-text-red {
+  text-shadow: 0 0 14px rgba(239, 68, 68, 0.65);
+}
+
+.glow-text-emerald {
+  text-shadow: 0 0 12px rgba(16, 185, 129, 0.6);
+}
+
+/* Subtle vertical ribbed obsidian background texture */
+.bg-jail-bars {
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.018) 0px,
+    rgba(255, 255, 255, 0.018) 1px,
+    transparent 1px,
+    transparent 22px
+  );
+}
+
+/* Smooth hidden scrollbar */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* UI Entrance Animations (used across Modals, Drawers & Toasts) */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.2s ease-out both;
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+  }
+  65% {
+    opacity: 1;
+    transform: translateY(2px) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-bounce-in {
+  animation: bounceIn 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes splashLogoIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.88) translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-splash-logo {
+  animation: splashLogoIn 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes splashRingFill {
+  0% {
+    stroke-dashoffset: 465;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-splash-ring {
+  stroke-dasharray: 465;
+  stroke-dashoffset: 465;
+  animation: splashRingFill 1.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes liveGradientSpin {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes liveHaloPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 2px rgba(255, 0, 80, 0.85), 0 0 14px rgba(255, 0, 80, 0.65), 0 0 26px rgba(0, 242, 254, 0.35);
+  }
+  50% {
+    box-shadow: 0 0 0 3px rgba(255, 59, 130, 1), 0 0 20px rgba(255, 0, 80, 0.88), 0 0 32px rgba(0, 242, 254, 0.55);
+  }
+}
+
+@keyframes livePseudoGlow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(255, 0, 80, 0.45);
+  }
+  50% {
+    box-shadow: 0 0 18px rgba(255, 0, 80, 0.85), 0 0 24px rgba(0, 242, 254, 0.45);
+  }
+}
+
+.live-avatar-aura {
+  position: relative;
+  border-radius: 9999px;
+  padding: 2.5px;
+  background: linear-gradient(135deg, #ff0050, #ff6b00, #00f2fe, #ff0050);
+  background-size: 240% 240%;
+  animation: liveGradientSpin 2.4s ease infinite, liveHaloPulse 1.5s ease-in-out infinite;
+}
+
+.live-pseudo-pill {
+  background: linear-gradient(90deg, #ff0050, #e11d48, #ff3366);
+  background-size: 200% 200%;
+  animation: liveGradientSpin 2.2s ease infinite, livePseudoGlow 1.5s ease-in-out infinite;
+}
+
+.live-card-glow {
+  box-shadow: 0 0 24px -6px rgba(255, 0, 80, 0.42), 0 0 14px -6px rgba(0, 242, 254, 0.25);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-splash-logo,
+  .animate-neon-flicker,
+  .animate-fade-in,
+  .animate-bounce-in,
+  .animate-splash-ring,
+  .live-avatar-aura,
+  .live-pseudo-pill {
+    animation: none !important;
+  }
+
+  .animate-splash-ring {
+    stroke-dashoffset: 0 !important;
+  }
+}
+
+/* Intermittent neon sign flicker for the red "É" without resizing GPU paint bounds */
+@keyframes neonFlicker {
+  0%, 18%, 22%, 25%, 53%, 57%, 100% {
+    opacity: 1;
+    text-shadow: 0 0 12px rgba(239, 68, 68, 0.85), 0 0 24px rgba(239, 68, 68, 0.45);
+    color: #ef4444;
+  }
+  19%, 21% {
+    opacity: 0.45;
+    text-shadow: 0 0 4px rgba(239, 68, 68, 0.25);
+    color: #b91c1c;
+  }
+  23%, 24% {
+    opacity: 0.7;
+    text-shadow: 0 0 6px rgba(239, 68, 68, 0.35);
+    color: #dc2626;
+  }
+  54%, 56% {
+    opacity: 0.4;
+    text-shadow: 0 0 3px rgba(239, 68, 68, 0.2);
+    color: #991b1b;
+  }
+}
+
+.animate-neon-flicker {
+  animation: neonFlicker 4.2s infinite ease-in-out;
+}
+
+/* ========================================================
+   Mode Jour / Mode Nuit (Light Mode Theme Overrides)
+   Contraste adouci, reposant, anti-éblouissement
+   ======================================================== */
+
+html.light,
+html.light body {
+  background-color: #e5e8ef;
+  color: #0f172a;
+}
+
+html.light .bg-jail-bars {
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(15, 23, 42, 0.055) 0px,
+    rgba(15, 23, 42, 0.055) 1px,
+    transparent 1px,
+    transparent 28px
+  );
+}
+
+/* Form inputs & surfaces contrast in light mode */
+html.light input:not([type="checkbox"]):not([type="radio"]):not(.bg-transparent):not(.live-dark-input),
+html.light textarea:not(.bg-transparent):not(.live-dark-input) {
+  background-color: #ffffff;
+  color: #09090b;
+  border-color: #cbd5e1;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
+}
+
+html.light input.bg-transparent:not(.live-dark-input),
+html.light textarea.bg-transparent:not(.live-dark-input) {
+  background-color: transparent;
+  color: #09090b;
+}
+
+html.light .live-dark-stage input,
+html.light .live-dark-stage textarea {
+  background-color: transparent;
+  color: #ffffff;
+}
+
+html.light .live-dark-stage input::placeholder,
+html.light .live-dark-stage textarea::placeholder {
+  color: #e4e4e7;
+}
+
+html.light input::placeholder,
+html.light textarea::placeholder {
+  color: #64748b;
+}
+
+/* Global Light Mode Contrast Enhancement */
+html.light .border-zinc-200 {
+  border-color: #cbd5e1;
+}
+
+html.light .border-zinc-300 {
+  border-color: #94a3b8;
+}
+
+html.light .text-zinc-500 {
+  color: #475569;
+}
+
+html.light .text-zinc-400 {
+  color: #64748b;
+}
+
+html.light .text-zinc-600 {
+  color: #334155;
+}
+
+html.light .bg-zinc-50 {
+  background-color: #f1f3f7;
+}
+
+html.light .bg-zinc-100 {
+  background-color: #e2e6ee;
+}
+
+/* Guaranteed Live Camera Zoom Scale Classes (0.75x up to 2.0x) */
+.live-zoom-075 {
+  transform: scale(0.75);
+  transform-origin: center center;
+  will-change: transform;
+}
+
+.live-zoom-090 {
+  transform: scale(0.9);
+  transform-origin: center center;
+  will-change: transform;
+}
+
+.live-zoom-100 {
+  transform: scale(1);
+  transform-origin: center center;
+  will-change: transform;
+}
+
+.live-zoom-125 {
+  transform: scale(1.25);
+  transform-origin: center center;
+  will-change: transform;
+}
+
+.live-zoom-150 {
+  transform: scale(1.5);
+  transform-origin: center center;
+  will-change: transform;
+}
+
+.live-zoom-200 {
+  transform: scale(2);
+  transform-origin: center center;
+  will-change: transform;
+}
+
+/* Continuous vertical upward scrolling with crossfade (fondu enchaîné) for live inmates profile photos */
+@keyframes liveVerticalScrollUp {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+.live-vertical-stream {
+  animation: liveVerticalScrollUp 38s linear infinite;
+  will-change: transform;
+}
+
+.live-vertical-stream:hover,
+.live-vertical-stream:active,
+.live-vertical-stream:focus-within {
+  animation-play-state: paused;
+}
+
+.live-mask-fade-y {
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 22%, rgba(0, 0, 0, 1) 78%, rgba(0, 0, 0, 0) 100%);
+  -webkit-mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 22%, rgba(0, 0, 0, 1) 78%, rgba(0, 0, 0, 0) 100%);
+}
+
+.live-mask-fade-chat {
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 14%, rgba(0, 0, 0, 1) 86%, rgba(0, 0, 0, 0) 100%);
+  -webkit-mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 14%, rgba(0, 0, 0, 1) 86%, rgba(0, 0, 0, 0) 100%);
+}
+
+.live-mask-fade-soft {
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 8%, rgba(0, 0, 0, 1) 92%, rgba(0, 0, 0, 0) 100%);
+  -webkit-mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 8%, rgba(0, 0, 0, 1) 92%, rgba(0, 0, 0, 0) 100%);
+}
